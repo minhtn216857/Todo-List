@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.todolist.R
 import com.example.todolist.databinding.TaskItemBinding
-import com.example.todolist.model.Task
+import com.example.todolist.data.model.Task
 import com.example.todolist.utils.Utils
 
 class TaskAdapter(
@@ -21,7 +21,7 @@ class TaskAdapter(
     ): RecyclerView.ViewHolder(binding.root){
         fun bind(task: Task){
             binding.textNameTask.text = task.nameTask
-            binding.textDeadline.text = Utils.dateToString(task.deadline)
+            binding.textDeadline.text = task.deadline
             binding.root.setOnClickListener{
                 listener.OnItemClick(task)
             }

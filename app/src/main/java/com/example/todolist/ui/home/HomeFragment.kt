@@ -8,14 +8,16 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.todolist.R
+import com.example.todolist.TaskApplication
 import com.example.todolist.databinding.FragmentHomeBinding
-import com.example.todolist.model.Task
+import com.example.todolist.data.model.Task
+import com.example.todolist.data.source.Repository
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var homeViewModel: HomeViewModel
     private lateinit var taskViewModel: TaskViewModel
     private lateinit var adapter: TaskAdapter
-    private val homeViewModel = HomeViewModel.instance
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +40,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupViewModel(){
+        val repository = (requireActivity().application as TaskApplication).repository
+
+        homeViewModel = ViewModelProvider(
+            requireActivity(),
+            HomeViewModelFactory(repository)
+        )[HomeViewModel::class.java]
+
         taskViewModel = ViewModelProvider(requireActivity())[TaskViewModel::class.java]
+
+        homeViewModel.loadTaskData()
     }
 
     private fun setupRecycler(){
@@ -47,10 +58,7 @@ class HomeFragment : Fragment() {
                 taskViewModel.setSelectedTask(task)
             }
         })
-        homeViewModel!!.loadData(requireContext())
-        homeViewModel.listTasks.observe(viewLifecycleOwner){ tasks: List<Task> ->
-            adapter.setTasks(tasks)
-        }
+
         binding.recycleTask.adapter = adapter
 
 

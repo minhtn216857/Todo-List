@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.resolve.featureDependencies
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.google.devtools.ksp")
+
 }
 
 android {
@@ -43,6 +45,23 @@ android {
 
 dependencies {
     implementation(libs.androidx.cardview)
+
+
+    // navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.converter.gson)
+
+    // room database
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.legacy.support.v4)
+    annotationProcessor(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    implementation (libs.androidx.lifecycle.runtime.ktx)
 
     implementation (libs.androidx.core.ktx.v1101)
     implementation (libs.jackson.module.kotlin)

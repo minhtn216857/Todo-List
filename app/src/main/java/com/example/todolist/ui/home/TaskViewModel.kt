@@ -3,7 +3,7 @@ package com.example.todolist.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.todolist.model.Task
+import com.example.todolist.data.model.Task
 
 class TaskViewModel: ViewModel() {
     private val selectedTask = MutableLiveData<Task>()
