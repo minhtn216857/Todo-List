@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.resolve.featureDependencies
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -5,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.todolist"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.todolist"
@@ -33,10 +35,18 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
+    implementation(libs.androidx.cardview)
 
+    implementation (libs.androidx.core.ktx.v1101)
+    implementation (libs.jackson.module.kotlin)
+    implementation (libs.glide)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
